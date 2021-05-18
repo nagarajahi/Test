@@ -1,0 +1,100 @@
+﻿@model JewelryCoreWebApp.Models.EstimationModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script asp-src-include="~/js/Estimation.js"></script>
+    <title>Estimation</title>
+    <style type="text/css">
+        .bs-example {
+            height: 220px;
+        }
+
+        .centerlook {
+            padding-left: 400px;
+            font-weight: bold;
+            width: 1000px;
+        }
+
+        .error {
+            padding-left: 400px;
+            font-weight: bold;
+            width: 1000px;
+            color: red;
+        }
+                
+        .loginbtn {
+            padding-left: 500px;
+        }
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        <div class="bs-example" style="width:inherit; background-color: #808080;border:2px solid gray;">
+
+            <div class="form-group centerlook">
+                <label>
+                    Welcome: @ViewBag.Profile
+                </label>
+            </div>
+            <div class="form-group centerlook">
+                <label>GoldPrice</label>
+                @*@Html.EditorFor(model => model.GoldPrice)*@
+                @Html.TextBoxFor(m => m.GoldPrice,
+                                                     new
+                                                     {
+                                                         @id = "gid"
+                                                     })
+            </div>
+            <div class="form-group centerlook">
+                <label>Wieght</label>
+                @Html.TextBoxFor(m => m.Weight,
+                                                     new
+                                                     {
+                                                         @id = "wid"
+                                                     })
+
+            </div>
+            <div class="form-group centerlook">
+                <label>TotalPrice</label>
+                @*@Html.EditorFor(model => model.TotalPrice)*@
+                @Html.TextBoxFor(m => m.TotalPrice,
+                                                     new
+                                                     {
+                                                         @id = "tid"
+                                                     })
+                @if (@ViewBag.Profile != "Normal User")
+                {
+                    <label>Discount</label>
+                    @*@Html.EditorFor(model => model.TotalPrice)*@
+                    @Html.TextBoxFor(m => m.Discount,
+                                                         new
+                                                         {
+                                                             @id = "disid"
+                                                         })
+                }
+            </div>
+            <div class="loginbtn">
+                <button type="button" value="Calculate" id="cal" class="btn btn-primary">submit</button>
+                <input type="submit" value="Print To Screen" id="submitscreen" class="btn btn-primary" />
+                <input type="submit" value="Print To File" class="btn btn-primary" />
+                <input type="submit" value="Print To Paper" class="btn btn-primary" />
+                <input type="button" value="Logout" class="btn btn-primary" onclick="location.href='@Url.Action("Login","Account")'"/>
+            </div>
+
+        </div>
+    }
+</body>
+</html>
